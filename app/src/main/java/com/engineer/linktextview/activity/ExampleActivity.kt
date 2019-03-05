@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.engineer.linktextview.Linker
+import com.engineer.linktextview.internal.OnLinkClickListener
 import com.engineer.linktextview.R
 import kotlinx.android.synthetic.main.activity_example.*
 
@@ -27,7 +28,7 @@ class ExampleActivity : AppCompatActivity() {
         datas.put("「移动互联网」", "https://topic/19550547")
 
         val buffer = StringBuilder()
-        for ((key, value) in datas) {
+        for ((key, _) in datas) {
             buffer.append(key)
         }
 
@@ -40,21 +41,31 @@ class ExampleActivity : AppCompatActivity() {
 
         val test = "111111111111" + buffer.toString() + "23e4234324323232423432432"
 
-
+        val test1 = "aaaa"+arrays[0]+"222222222"+arrays[2]+"fdjkjkdajfdkl"+arrays[1]+arrays[3]
 
         Linker.Builder()
             .content(test)
             .textView(mulit_text_view)
             .links(arrays)
             .linkColor(Color.RED)
-            .addOnLinkClickListener(object : Linker.OnLinkClickListener {
+            .addOnLinkClickListener(object : OnLinkClickListener {
                 override fun onClick(view: View, content: String) {
                     Toast.makeText(mContext, "value is $content", Toast.LENGTH_SHORT).show()
                 }
             })
             .apply()
 
-
+        Linker.Builder()
+            .content(test1)
+            .textView(mulit_text_view_1)
+            .links(arrays)
+            .linkColor(Color.RED)
+            .addOnLinkClickListener(object : OnLinkClickListener {
+                override fun onClick(view: View, content: String) {
+                    Toast.makeText(mContext, "value is $content", Toast.LENGTH_SHORT).show()
+                }
+            })
+            .apply()
     }
 
 }

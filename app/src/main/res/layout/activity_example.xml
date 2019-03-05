@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="BBBB5555BBBB"
+            tools:text="BBBB5555BBBB"
             android:textColor="@color/black"
             android:textSize="18sp" />
 
@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="BBBB5555BBBB"
+            tools:text="BBBB5555BBBB"
             android:textColor="@color/black"
             android:textSize="18sp" />
 </LinearLayout>

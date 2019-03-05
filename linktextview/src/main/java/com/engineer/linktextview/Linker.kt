@@ -1,6 +1,5 @@
 package com.engineer.linktextview
 
-import android.content.Context
 import android.graphics.Color
 import android.text.SpannableString
 import android.text.Spanned
@@ -9,10 +8,11 @@ import android.text.TextUtils
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
+import com.engineer.linktextview.internal.OnLinkClickListener
+import com.engineer.linktextview.internal.TextViewLinkMovementMethod
 
 /**
- * @author: zhuyongging
+ * @author: rookie
  * @since: 2019-03-02
  */
 object Linker {
@@ -22,7 +22,7 @@ object Linker {
 
 
         private lateinit var mTextView: TextView
-        private lateinit var Content: String
+        private lateinit var content: String
         private lateinit var links: List<String>
         private var color: Int = Color.BLACK
         private var shouldShowUnderLine: Boolean = false
@@ -34,7 +34,7 @@ object Linker {
         }
 
         fun content(content: String): Builder {
-            this.Content = content
+            this.content = content
             return this
         }
 
@@ -69,21 +69,18 @@ object Linker {
         }
 
         fun apply() {
-            applylink(mTextView, Content, links, color,
+            applylink(mTextView, content, links, color,
                     shouldShowUnderLine, mLinkClickListener)
         }
 
     }
 
     fun applylink(mTextView: TextView?, content: String, links: List<String>?, color: Int,
-                  shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener) {
+                  shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener
+    ) {
 
         if (mTextView == null) {
             throw IllegalStateException("the TextView must not null")
-        }
-
-        if (TextUtils.isEmpty(content)) {
-            throw IllegalStateException("the content must not null")
         }
 
         if (links == null || links.isEmpty()) {
@@ -97,7 +94,8 @@ object Linker {
     }
 
     private fun applyLinkInternal(mTextView: TextView, content: String, links: List<String>,
-                                  color: Int, shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener?) {
+                                  color: Int, shouldShowUnderLine: Boolean,
+                                  linkClickListener: OnLinkClickListener?) {
 
         val spannableString = SpannableString(content)
         for (value in links) {
@@ -160,12 +158,4 @@ object Linker {
     }
 
     // </editor-fold>
-
-    interface OnLinkClickListener {
-        /**
-         * @param view    the view been clicked ,aka the TextView
-         * @param content the content which is clicked
-         */
-        fun onClick(view: View, content: String)
-    }
 }

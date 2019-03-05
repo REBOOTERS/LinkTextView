@@ -1,4 +1,4 @@
-package com.engineer.linktextview
+package com.engineer.linktextview.internal
 
 import android.text.Spannable
 import android.text.method.LinkMovementMethod
@@ -8,7 +8,7 @@ import android.widget.TextView
 
 /**
  *
- * @author: zhuyongging
+ * @author: rookie
  * @since: 2019-03-02
  */
 
