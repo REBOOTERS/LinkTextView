@@ -1,8 +1,8 @@
 package com.engineer.linktextview.activity
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
@@ -19,53 +19,70 @@ class ExampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_example)
         mContext = this
 
+        //<editor-fold desc="android">
+        val android = getString(R.string.text_android_baike)
+        val androidRules = arrayOf("Linux","操作系统","移动设备","智能手机","平板电脑","开放手机联盟")
+        Linker.Builder()
+            .content(android)
+            .textView(text_view_1)
+            .links(androidRules)
+            .linkColor(ContextCompat.getColor(this,R.color.link))
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+        //<editor-fold desc="star">
+        val star = getString(R.string.text_star_baike)
+        val starRules = listOf("黎明", "张学友", "刘德华", "郭富城")
+        Linker.Builder()
+            .content(star)
+            .textView(text_view_2)
+            .links(starRules)
+            .linkColor(ContextCompat.getColor(this,R.color.link))
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+        //<editor-fold desc="english">
+        val english = getString(R.string.text_english)
+        val englishRules = listOf("Manchester City","Asia")
+        Linker.Builder()
+            .content(english)
+            .textView(text_view_3)
+            .links(englishRules)
+            .linkColor(ContextCompat.getColor(this,R.color.red))
+            .shouldShowUnderLine(true)
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+        //<editor-fold desc="actors">
+        val actors = getString(R.string.text_actors)
+        val actorsRules = listOf(" 刘仁娜","李栋旭","吴政世","沈亨倬","吴义植","张基龙","黄灿盛","金希珍")
+        Linker.Builder()
+            .content(actors)
+            .textView(text_view_4)
+            .links(actorsRules)
+            .linkColor(ContextCompat.getColor(this,R.color.link))
+            .shouldShowUnderLine(false)
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+        //<editor-fold desc="email">
+        val email = getString(R.string.text_email)
+        val emailRules = "movie@douban.com"
+        Linker.Builder()
+            .content(email)
+            .textView(text_view_5)
+            .links(emailRules)
+            .linkColor(ContextCompat.getColor(this,R.color.gray))
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+    }
 
-        val datas = HashMap<String, String>()
 
-        datas.put("「电影」", "https://topic/19550429")
-        datas.put("「阅读」", "https://topic/19550564")
-        datas.put("「自然科学」", "https://topic/19553298")
-        datas.put("「移动互联网」", "https://topic/19550547")
-
-        val buffer = StringBuilder()
-        for ((key, _) in datas) {
-            buffer.append(key)
+    private val onLinkClickListener = object:OnLinkClickListener{
+        override fun onClick(view: View, content: String) {
+            Toast.makeText(mContext, "clicked link is : $content", Toast.LENGTH_SHORT).show()
         }
-
-
-        val arrays = ArrayList<String>()
-        arrays.add("「电影」")
-        arrays.add("「阅读」")
-        arrays.add("「自然科学」")
-        arrays.add("「移动互联网」")
-
-        val test = "111111111111" + buffer.toString() + "23e4234324323232423432432"
-
-        val test1 = "aaaa"+arrays[0]+"222222222"+arrays[2]+"fdjkjkdajfdkl"+arrays[1]+arrays[3]
-
-        Linker.Builder()
-            .content(test)
-            .textView(mulit_text_view)
-            .links(arrays)
-            .linkColor(Color.RED)
-            .addOnLinkClickListener(object : OnLinkClickListener {
-                override fun onClick(view: View, content: String) {
-                    Toast.makeText(mContext, "value is $content", Toast.LENGTH_SHORT).show()
-                }
-            })
-            .apply()
-
-        Linker.Builder()
-            .content(test1)
-            .textView(mulit_text_view_1)
-            .links(arrays)
-            .linkColor(Color.RED)
-            .addOnLinkClickListener(object : OnLinkClickListener {
-                override fun onClick(view: View, content: String) {
-                    Toast.makeText(mContext, "value is $content", Toast.LENGTH_SHORT).show()
-                }
-            })
-            .apply()
     }
 
 }

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LInkTextView</string>
+    <string name="text_android_baike">Android是一种基于Linux的自由及开放源代码的操作系统。主要使用于移动设备，如智能手机和平板电脑，由Google（谷歌）公司和开放手机联盟领导及开发。</string>
+    <string name="text_star_baike">香港四大天王，是指20世纪90年代四位最受欢迎的男歌手，分别是：张学友、刘德华、黎明及郭富城。</string>
+    <string name="text_english">The owners of Premier League champions Manchester City are considering investing in a club in India as part of an effort to increase their presence in Asia, Chief Executive Ferran Soriano has said.</string>
+    <string name="text_actors">主演: 李栋旭 / 刘仁娜 / 李尚禹 / 孙星允 / 吴政世 / 沈亨倬 / 张素妍 / 朴智焕 / 李俊赫 / 吴义植 / 金希珍 / 朴庆惠 / 张基龙 / 黄灿盛</string>
+    <string name="text_email">电影合作邮箱：movie@douban.com</string>
 </resources>

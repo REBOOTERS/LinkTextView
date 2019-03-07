@@ -1,29 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="@color/background"
-              android:orientation="vertical"
-              tools:context=".activity.ExampleActivity">
 
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        tools:context=".activity.ExampleActivity">
 
-
-    <TextView
-            android:id="@+id/mulit_text_view"
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            tools:text="BBBB5555BBBB"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
+            android:orientation="vertical">
 
-    <TextView
-            android:id="@+id/mulit_text_view_1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            tools:text="BBBB5555BBBB"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-</LinearLayout>
+
+        <TextView
+                android:id="@+id/text_view_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+
+        <TextView
+                android:id="@+id/text_view_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:id="@+id/text_view_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:maxLines="3"
+                android:ellipsize="middle"
+                android:id="@+id/text_view_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:id="@+id/text_view_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</ScrollView>
