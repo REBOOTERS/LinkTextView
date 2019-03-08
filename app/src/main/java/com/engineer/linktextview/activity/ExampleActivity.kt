@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import com.engineer.linktextview.Linker
-import com.engineer.linktextview.internal.OnLinkClickListener
 import com.engineer.linktextview.R
+import com.engineer.linktextview.internal.OnLinkClickListener
 import kotlinx.android.synthetic.main.activity_example.*
 
 class ExampleActivity : AppCompatActivity() {
