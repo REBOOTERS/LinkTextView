@@ -22,10 +22,10 @@ object Linker {
 
 
         private lateinit var mTextView: TextView
-        private lateinit var content: String
-        private lateinit var links: List<String>
-        private var color: Int = Color.BLACK
-        private var shouldShowUnderLine: Boolean = false
+        private lateinit var mContent: String
+        private lateinit var mLinks: List<String>
+        private var mColor: Int = Color.BLACK
+        private var mShouldShowUnderLine: Boolean = false
         private lateinit var mLinkClickListener: OnLinkClickListener
 
         fun textView(textView: TextView): Builder {
@@ -34,7 +34,7 @@ object Linker {
         }
 
         fun content(content: String): Builder {
-            this.content = content
+            this.mContent = content
             return this
         }
 
@@ -48,18 +48,18 @@ object Linker {
         }
 
         fun links(links: List<String>): Builder {
-            this.links = links
+            this.mLinks = links
             return this
         }
 
 
         fun linkColor(color: Int): Builder {
-            this.color = color
+            this.mColor = color
             return this
         }
 
         fun shouldShowUnderLine(shouldShowUnderLine: Boolean): Builder {
-            this.shouldShowUnderLine = shouldShowUnderLine
+            this.mShouldShowUnderLine = shouldShowUnderLine
             return this
         }
 
@@ -69,16 +69,13 @@ object Linker {
         }
 
         fun apply() {
-            applylink(mTextView, content, links, color,
-                    shouldShowUnderLine, mLinkClickListener)
+            applylink(mTextView, mContent, mLinks, mColor,
+                    mShouldShowUnderLine, mLinkClickListener)
         }
-
     }
 
     fun applylink(mTextView: TextView?, content: String, links: List<String>?, color: Int,
-                  shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener
-    ) {
-
+                  shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener) {
         if (mTextView == null) {
             throw IllegalStateException("the TextView must not null")
         }

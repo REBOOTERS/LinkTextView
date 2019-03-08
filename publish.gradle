@@ -1,0 +1,14 @@
+apply plugin: 'com.novoda.bintray-release'
+
+def publish_version = "0.0.1"
+
+// <editor-fold desc="stable config" defaultstate="collapsed">
+publish {
+    userOrg = 'engineer'
+    groupId = 'com.engineer.linktextview'
+    artifactId = 'linktextview'
+    publishVersion = "$publish_version"
+    desc = 'Help to make clickaleb TextView easier'
+    website = 'https://github.com/REBOOTERS/LinkTextView'
+}
+// </editor-fold>

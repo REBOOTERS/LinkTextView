@@ -5,16 +5,16 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+def path = rootProject.file("publish.gradle")
+apply from:file(path)
+
 def ext = rootProject.ext
 
 android {
-    compileSdkVersion 28
-
-
-
+    compileSdkVersion ext.compileSdkVersion
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion ext.minSdkVersion
+        targetSdkVersion ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -41,3 +41,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
+// how to publish https://blog.csdn.net/stupid56862/article/details/81189426
+// https://github.com/novoda/bintray-release
