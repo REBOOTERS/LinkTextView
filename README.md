@@ -8,7 +8,7 @@ Made TextView with **ClickableSpan** more easy
 ## Gradle 
 
 ```groovy
-	 implementation "com.zhihu.android:matisse:$latest_version"
+	 implementation "com.engineer.linktextview:linktextview:0.0.1"
 ```
 
 ## Usage
