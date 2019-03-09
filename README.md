@@ -1,6 +1,8 @@
 # LinkTextView
 Made TextView with **ClickableSpan** more easy
 
+[ ![Download](https://api.bintray.com/packages/rookieboy/maven/linktextview/images/download.svg?version=0.0.1) ](https://bintray.com/rookieboy/maven/linktextview/0.0.1/link)
+
 <img src="https://raw.githubusercontent.com/REBOOTERS/Images/master/LinkTextView/art.gif"/>
 
 
