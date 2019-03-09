@@ -20,7 +20,9 @@ class ExampleActivity : AppCompatActivity() {
         mContext = this
 
         //<editor-fold desc="android">
+        // the content should be set for TextView
         val android = getString(R.string.text_android_baike)
+        // Array to define all clickable words
         val androidRules = arrayOf("Linux","操作系统","移动设备","智能手机","平板电脑","开放手机联盟")
         Linker.Builder()
             .content(android)
