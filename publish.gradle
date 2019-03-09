@@ -6,8 +6,8 @@ def publish_version = "0.0.1"
 
 // <editor-fold desc="stable config" defaultstate="collapsed">
 publish {
-    userOrg = 'engineer'
-    groupId = 'com.engineer.linktextview'
+    userOrg = 'rookieboy'
+    groupId = 'com.reoobter'
     artifactId = 'linktextview'
     publishVersion = "$publish_version"
     desc = 'Help to make clickaleb TextView easier'
