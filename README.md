@@ -1,7 +1,8 @@
 # LinkTextView
 Made TextView with **ClickableSpan** more easy
 
-![]("https://raw.githubusercontent.com/REBOOTERS/LinkTextView/master/art/click.gif")
+<img src="https://raw.githubusercontent.com/REBOOTERS/Images/master/LinkTextView/art.gif"/>
+
 
 
 ## Gradle 
