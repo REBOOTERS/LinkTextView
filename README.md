@@ -15,7 +15,7 @@ Made TextView with **ClickableSpan** more easy
 
 ## Usage
 
-```java
+```kotlin
 // the content should be set for TextView
 val android = getString(R.string.text_android_baike) 
 // Array to define all clickable words
