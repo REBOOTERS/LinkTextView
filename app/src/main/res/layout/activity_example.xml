@@ -62,6 +62,15 @@
                 android:textColor="@color/black"
                 android:textSize="18sp"/>
 
+        <TextView
+                android:id="@+id/text_view_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
     </LinearLayout>
 
 </ScrollView>

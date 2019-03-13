@@ -1,10 +1,12 @@
 package com.engineer.linktextview
 
 import android.graphics.Color
+import android.support.annotation.Nullable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import android.widget.TextView
@@ -20,7 +22,7 @@ object Linker {
 
     class Builder {
 
-
+        private var mLinkMovementMethod: LinkMovementMethod? = null
         private lateinit var mTextView: TextView
         private lateinit var mContent: String
         private lateinit var mLinks: List<String>
@@ -68,14 +70,28 @@ object Linker {
             return this
         }
 
+        fun setLinkMovementMethod(method: LinkMovementMethod): Builder {
+            this.mLinkMovementMethod = method
+            return this
+        }
+
         fun apply() {
-            applylink(mTextView, mContent, mLinks, mColor,
-                    mShouldShowUnderLine, mLinkClickListener)
+            applylink(
+                mTextView, mContent, mLinks, mColor,
+                mShouldShowUnderLine, mLinkClickListener, mLinkMovementMethod
+            )
         }
     }
 
-    fun applylink(mTextView: TextView?, content: String, links: List<String>?, color: Int,
-                  shouldShowUnderLine: Boolean, linkClickListener: OnLinkClickListener) {
+    fun applylink(
+        mTextView: TextView?,
+        content: String,
+        links: List<String>?,
+        color: Int,
+        shouldShowUnderLine: Boolean,
+        linkClickListener: OnLinkClickListener,
+        mLinkMovementMethod: LinkMovementMethod?
+    ) {
         if (mTextView == null) {
             throw IllegalStateException("the TextView must not null")
         }
@@ -85,14 +101,19 @@ object Linker {
             return
         }
 
-        applyLinkInternal(mTextView, content, links, color,
-                shouldShowUnderLine, linkClickListener)
+        applyLinkInternal(
+            mTextView, content, links, color,
+            shouldShowUnderLine, linkClickListener, mLinkMovementMethod
+        )
 
     }
 
-    private fun applyLinkInternal(mTextView: TextView, content: String, links: List<String>,
-                                  color: Int, shouldShowUnderLine: Boolean,
-                                  linkClickListener: OnLinkClickListener?) {
+    private fun applyLinkInternal(
+        mTextView: TextView, content: String, links: List<String>,
+        color: Int, shouldShowUnderLine: Boolean,
+        linkClickListener: OnLinkClickListener?,
+        mLinkMovementMethod: LinkMovementMethod?
+    ) {
 
         val spannableString = SpannableString(content)
         for (value in links) {
@@ -119,7 +140,13 @@ object Linker {
             spannableString.setSpan(clickableSpan, index, index + value.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         mTextView.text = spannableString
-        mTextView.movementMethod = TextViewLinkMovementMethod().getInstance()
+
+        if (mLinkMovementMethod != null) {
+            mTextView.movementMethod = mLinkMovementMethod
+        } else {
+            mTextView.movementMethod = TextViewLinkMovementMethod().getInstance()
+
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="for map links">
