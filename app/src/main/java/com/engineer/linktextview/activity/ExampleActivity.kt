@@ -32,6 +32,7 @@ class ExampleActivity : AppCompatActivity() {
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
         //</editor-fold>
+
         //<editor-fold desc="star">
         val star = getString(R.string.text_star_baike)
         val starRules = listOf("黎明", "张学友", "刘德华", "郭富城")
@@ -43,6 +44,7 @@ class ExampleActivity : AppCompatActivity() {
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
         //</editor-fold>
+
         //<editor-fold desc="english">
         val english = getString(R.string.text_english)
         val englishRules = listOf("Manchester City", "Asia")
@@ -55,6 +57,7 @@ class ExampleActivity : AppCompatActivity() {
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
         //</editor-fold>
+
         //<editor-fold desc="actors">
         val actors = getString(R.string.text_actors)
         val actorsRules = listOf(" 刘仁娜", "李栋旭", "吴政世", "沈亨倬", "吴义植", "张基龙", "黄灿盛", "金希珍")
@@ -67,6 +70,31 @@ class ExampleActivity : AppCompatActivity() {
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
         //</editor-fold>
+
+
+        //<editor-fold desc="actors with different colors">
+
+
+        val actorsRules1 = listOf(
+            Pair("刘仁娜", ContextCompat.getColor(this, R.color.red)),
+            Pair("李栋旭", ContextCompat.getColor(this, R.color.colorPrimary)),
+            Pair("吴政世", ContextCompat.getColor(this, R.color.colorAccent)),
+            Pair("沈亨倬", ContextCompat.getColor(this, R.color.colorPrimaryDark)),
+            Pair("吴义植", ContextCompat.getColor(this, R.color.green)),
+            Pair("张基龙", ContextCompat.getColor(this, R.color.blue)),
+            Pair("黄灿盛", ContextCompat.getColor(this, R.color.yellow)),
+            Pair("金希珍", ContextCompat.getColor(this, R.color.orange))
+        )
+
+        Linker.Builder()
+            .content(actors)
+            .textView(text_view_4_1)
+            .colorLinks(actorsRules1)
+            .shouldShowUnderLine(false)
+            .addOnLinkClickListener(onLinkClickListener)
+            .apply()
+        //</editor-fold>
+
         //<editor-fold desc="email">
         val email = getString(R.string.text_email)
         val emailRules = "movie@douban.com"
@@ -77,7 +105,6 @@ class ExampleActivity : AppCompatActivity() {
             .linkColor(ContextCompat.getColor(this, R.color.gray))
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
-        //</editor-fold>
 
 
         Linker.Builder()

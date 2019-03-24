@@ -1,7 +1,6 @@
 package com.engineer.linktextview
 
 import android.graphics.Color
-import android.support.annotation.Nullable
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextPaint
@@ -25,10 +24,11 @@ object Linker {
         private var mLinkMovementMethod: LinkMovementMethod? = null
         private lateinit var mTextView: TextView
         private lateinit var mContent: String
-        private lateinit var mLinks: List<String>
+        private var mLinks: List<String> = ArrayList()
         private var mColor: Int = Color.BLACK
         private var mShouldShowUnderLine: Boolean = false
         private lateinit var mLinkClickListener: OnLinkClickListener
+        private var mColorLinks: List<Pair<String, Int>> = ArrayList()
 
         fun textView(textView: TextView): Builder {
             this.mTextView = textView
@@ -51,6 +51,11 @@ object Linker {
 
         fun links(links: List<String>): Builder {
             this.mLinks = links
+            return this
+        }
+
+        fun colorLinks(links: List<Pair<String, Int>>): Builder {
+            this.mColorLinks = links
             return this
         }
 
@@ -78,7 +83,7 @@ object Linker {
         fun apply() {
             applylink(
                 mTextView, mContent, mLinks, mColor,
-                mShouldShowUnderLine, mLinkClickListener, mLinkMovementMethod
+                mShouldShowUnderLine, mLinkClickListener, mLinkMovementMethod, mColorLinks
             )
         }
     }
@@ -90,21 +95,33 @@ object Linker {
         color: Int,
         shouldShowUnderLine: Boolean,
         linkClickListener: OnLinkClickListener,
-        mLinkMovementMethod: LinkMovementMethod?
+        mLinkMovementMethod: LinkMovementMethod?,
+        mColorLinks: List<Pair<String, Int>>?
     ) {
         if (mTextView == null) {
             throw IllegalStateException("the TextView must not null")
         }
 
-        if (links == null || links.isEmpty()) {
+        if ((links == null || links.isEmpty()) && (mColorLinks == null || mColorLinks.isEmpty())) {
             mTextView.text = content
             return
         }
 
-        applyLinkInternal(
-            mTextView, content, links, color,
-            shouldShowUnderLine, linkClickListener, mLinkMovementMethod
-        )
+        if (mColorLinks != null && mColorLinks.isNotEmpty()) {
+            applyLinkInternal(
+                mTextView, content, mColorLinks,
+                shouldShowUnderLine, linkClickListener, mLinkMovementMethod
+            )
+            return
+        }
+
+        if (links != null && links.isNotEmpty()) {
+            applyLinkInternal(
+                mTextView, content, links, color,
+                shouldShowUnderLine, linkClickListener, mLinkMovementMethod
+            )
+        }
+
 
     }
 
@@ -138,6 +155,47 @@ object Linker {
             }
 
             spannableString.setSpan(clickableSpan, index, index + value.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        }
+        mTextView.text = spannableString
+
+        if (mLinkMovementMethod != null) {
+            mTextView.movementMethod = mLinkMovementMethod
+        } else {
+            mTextView.movementMethod = TextViewLinkMovementMethod().getInstance()
+
+        }
+    }
+
+    private fun applyLinkInternal(
+        mTextView: TextView, content: String, links: List<Pair<String, Int>>,
+        shouldShowUnderLine: Boolean,
+        linkClickListener: OnLinkClickListener?,
+        mLinkMovementMethod: LinkMovementMethod?
+    ) {
+
+        val spannableString = SpannableString(content)
+        for (value in links) {
+            if (TextUtils.isEmpty(value.first)) {
+                continue
+            }
+
+            val index = content.indexOf(value.first)
+            if (index < 0) {
+                continue
+            }
+
+            val clickableSpan = object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    linkClickListener?.onClick(widget, value.first)
+                }
+
+                override fun updateDrawState(ds: TextPaint) {
+                    ds.color = value.second
+                    ds.isUnderlineText = shouldShowUnderLine
+                }
+            }
+
+            spannableString.setSpan(clickableSpan, index, index + value.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         mTextView.text = spannableString
 

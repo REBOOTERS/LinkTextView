@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/white"
         tools:context=".activity.ExampleActivity">
 
     <LinearLayout
@@ -43,9 +43,18 @@
                 android:textSize="18sp"/>
 
         <TextView
-                android:maxLines="3"
                 android:ellipsize="middle"
                 android:id="@+id/text_view_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                tools:text="BBBB5555BBBB"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+        <TextView
+                android:ellipsize="middle"
+                android:id="@+id/text_view_4_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
