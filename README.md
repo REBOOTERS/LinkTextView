@@ -1,7 +1,7 @@
 # LinkTextView
 Made TextView with **ClickableSpan** more easy
 
-[ ![Download](https://api.bintray.com/packages/rookieboy/maven/linktextview/images/download.svg?version=0.0.1) ](https://bintray.com/rookieboy/maven/linktextview/0.0.1/link)
+[ ![Download](https://api.bintray.com/packages/rookieboy/maven/linktextview/images/download.svg?version=0.0.3) ](https://bintray.com/rookieboy/maven/linktextview/0.0.3/link)
 
 <img src="https://raw.githubusercontent.com/REBOOTERS/Images/master/LinkTextView/art.gif"/>
 
@@ -10,7 +10,7 @@ Made TextView with **ClickableSpan** more easy
 ## Gradle 
 
 ```groovy
-	 implementation "com.reoobter:linktextview:0.0.1"
+implementation "com.reoobter:linktextview:0.0.3"
 ```
 
 ## Usage
