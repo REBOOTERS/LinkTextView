@@ -45,7 +45,7 @@ private val onLinkClickListener = object:OnLinkClickListener{
 
 clickable word with different color
 
-<img src="https://raw.githubusercontent.com/REBOOTERS/Images/master/LinkTextView/linker_color.png"/>
+<img src="https://raw.githubusercontent.com/REBOOTERS/Images/master/LinkTextView/linker_color.png" width=40% />
 
 ```kotlin
 
