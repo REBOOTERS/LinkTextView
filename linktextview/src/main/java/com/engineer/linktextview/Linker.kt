@@ -11,6 +11,8 @@ import android.view.View
 import android.widget.TextView
 import com.engineer.linktextview.internal.OnLinkClickListener
 import com.engineer.linktextview.internal.TextViewLinkMovementMethod
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 
 /**
  * @author: rookie
@@ -131,30 +133,33 @@ object Linker {
         linkClickListener: OnLinkClickListener?,
         mLinkMovementMethod: LinkMovementMethod?
     ) {
-
         val spannableString = SpannableString(content)
+
+        var pattern: Pattern?
+        var matcher: Matcher?
+        var clickableSpan: ClickableSpan?
+
         for (value in links) {
             if (TextUtils.isEmpty(value)) {
                 continue
             }
 
-            val index = content.indexOf(value)
-            if (index < 0) {
-                continue
-            }
+            pattern = Pattern.compile(value)
+            matcher = pattern.matcher(content)
+            while (matcher.find()) {
+                clickableSpan = object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        linkClickListener?.onClick(widget, value)
+                    }
 
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    linkClickListener?.onClick(widget, value)
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.color = color
+                        ds.isUnderlineText = shouldShowUnderLine
+                    }
                 }
 
-                override fun updateDrawState(ds: TextPaint) {
-                    ds.color = color
-                    ds.isUnderlineText = shouldShowUnderLine
-                }
+                spannableString.setSpan(clickableSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
-
-            spannableString.setSpan(clickableSpan, index, index + value.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
         mTextView.text = spannableString
 
@@ -162,7 +167,6 @@ object Linker {
             mTextView.movementMethod = mLinkMovementMethod
         } else {
             mTextView.movementMethod = TextViewLinkMovementMethod().getInstance()
-
         }
     }
 
