@@ -12,8 +12,16 @@ Made TextView with **ClickableSpan** more easy
 ```groovy
 implementation "com.reoobter:linktextview:0.0.3"
 ```
+## Feature
+Thanks for [VeerHan](https://github.com/VeerHan)‘s [PR](https://github.com/REBOOTERS/LinkTextView/pull/1) .Now we support match repeat word in some complex scenes. for example 
+
+```java
+val androidRules = arrayOf("手机", "Linux", "操作系统", "移动设备", "智能手机", "平板电脑", "开放手机联盟")
+```
+the word "手机" is repeated in those keyword. when the word "手机" is clicked in ”智能手机“ or ”开发手机联盟“ ，it will be react as "手机” ，while when "智能手机" and ”开发手机联盟“ clicked ,it will react as normal. 
 
 ## Usage
+
 
 #### noraml 
 
@@ -70,7 +78,6 @@ Linker.Builder()
 
 ```
 
-
 ## API 
 
  method | function | must invocation| defaultValue
@@ -80,8 +87,9 @@ Linker.Builder()
 |links|String/Array<String>/List<String> to define clickable words |no| none|
 |linkColor|Color for clickable word|no| Color.Black|
 |colorLinks|supply a List of Pair,define both word and color |no|null|
-|shouldShowUnderLine|whether to show under for clickable word|no| false|
-|addOnLinkClickListener|add a listener will callback once click the link word|no| null|
+|shouldShowUnderLine|whether to show underline for clickable word|no| false|
+|addOnLinkClickListener|add a listener will callback once click the link word|no| internal|
+|setLinkMovementMethod|add a custom LinkMovementMethod|no| null|
 |apply|apply the function|yes| none|
 
 
