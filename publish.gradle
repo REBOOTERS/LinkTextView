@@ -1,6 +1,6 @@
 apply plugin: 'com.novoda.bintray-release'
 
-def publish_version = "0.0.3"
+def publish_version = "0.0.4"
 
 // ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 
