@@ -88,8 +88,8 @@ Linker.Builder()
 |linkColor|Color for clickable word|no| Color.Black|
 |colorLinks|supply a List of Pair,define both word and color |no|null|
 |shouldShowUnderLine|whether to show underline for clickable word|no| false|
-|addOnLinkClickListener|add a listener will callback once click the link word|no| internal|
-|setLinkMovementMethod|add a custom LinkMovementMethod|no| null|
+|addOnLinkClickListener|add a listener will callback once click the link word|no| null|
+|setLinkMovementMethod|add a custom LinkMovementMethod|no| internal|
 |apply|apply the function|yes| none|
 
 
