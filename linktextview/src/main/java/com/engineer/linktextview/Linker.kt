@@ -178,29 +178,35 @@ object Linker {
     ) {
 
         val spannableString = SpannableString(content)
+
+        var pattern: Pattern?
+        var matcher: Matcher?
+        var clickableSpan: ClickableSpan?
+
+
         for (value in links) {
             if (TextUtils.isEmpty(value.first)) {
                 continue
             }
 
-            val index = content.indexOf(value.first)
-            if (index < 0) {
-                continue
-            }
+            pattern = Pattern.compile(value.first)
+            matcher = pattern.matcher(content)
+            while (matcher.find()) {
+                clickableSpan = object : ClickableSpan() {
+                    override fun onClick(widget: View) {
+                        linkClickListener?.onClick(widget, value.first)
+                    }
 
-            val clickableSpan = object : ClickableSpan() {
-                override fun onClick(widget: View) {
-                    linkClickListener?.onClick(widget, value.first)
+                    override fun updateDrawState(ds: TextPaint) {
+                        ds.color = value.second
+                        ds.isUnderlineText = shouldShowUnderLine
+                    }
                 }
 
-                override fun updateDrawState(ds: TextPaint) {
-                    ds.color = value.second
-                    ds.isUnderlineText = shouldShowUnderLine
-                }
+                spannableString.setSpan(clickableSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
             }
-
-            spannableString.setSpan(clickableSpan, index, index + value.first.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         }
+
         mTextView.text = spannableString
 
         if (mLinkMovementMethod != null) {
