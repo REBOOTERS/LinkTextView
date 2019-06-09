@@ -127,6 +127,26 @@ object Linker {
 
     }
 
+    private fun mappingLink(content: String, links: List<String>): ArrayList<Pair<Int, Int>> {
+        var pattern: Pattern?
+        var matcher: Matcher?
+        var list: ArrayList<Pair<Int, Int>> = ArrayList()
+
+        for (value in links) {
+            if (value == "") {
+                continue
+            }
+
+            pattern = Pattern.compile(value)
+            matcher = pattern.matcher(content)
+            val start = matcher.start()
+            val end = matcher.end()
+            val pair = Pair(start, end)
+            list.add(pair)
+        }
+        return list
+    }
+
     private fun applyLinkInternal(
         mTextView: TextView, content: String, links: List<String>,
         color: Int, shouldShowUnderLine: Boolean,
