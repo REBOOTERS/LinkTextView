@@ -29,8 +29,9 @@ object Linker {
         private var mLinks: List<String> = ArrayList()
         private var mColor: Int = Color.BLACK
         private var mShouldShowUnderLine: Boolean = false
-        private lateinit var mLinkClickListener: OnLinkClickListener
+        private var mLinkClickListener: OnLinkClickListener? = null
         private var mColorLinks: List<Pair<String, Int>> = ArrayList()
+        private var mBold = false
 
         fun textView(textView: TextView): Builder {
             this.mTextView = textView
@@ -82,10 +83,15 @@ object Linker {
             return this
         }
 
+        fun bold(bold: Boolean): Builder {
+            this.mBold = bold
+            return this
+        }
+
         fun apply() {
             applylink(
                 mTextView, mContent, mLinks, mColor,
-                mShouldShowUnderLine, mLinkClickListener, mLinkMovementMethod, mColorLinks
+                mShouldShowUnderLine, mLinkClickListener, mLinkMovementMethod, mColorLinks, mBold
             )
         }
     }
@@ -96,9 +102,10 @@ object Linker {
         links: List<String>?,
         color: Int,
         shouldShowUnderLine: Boolean,
-        linkClickListener: OnLinkClickListener,
+        linkClickListener: OnLinkClickListener?,
         mLinkMovementMethod: LinkMovementMethod?,
-        mColorLinks: List<Pair<String, Int>>?
+        mColorLinks: List<Pair<String, Int>>?,
+        mBold: Boolean
     ) {
         if (mTextView == null) {
             throw IllegalStateException("the TextView must not null")
@@ -112,7 +119,7 @@ object Linker {
         if (mColorLinks != null && mColorLinks.isNotEmpty()) {
             applyLinkInternal(
                 mTextView, content, mColorLinks,
-                shouldShowUnderLine, linkClickListener, mLinkMovementMethod
+                shouldShowUnderLine, linkClickListener, mLinkMovementMethod, mBold
             )
             return
         }
@@ -120,7 +127,7 @@ object Linker {
         if (links != null && links.isNotEmpty()) {
             applyLinkInternal(
                 mTextView, content, links, color,
-                shouldShowUnderLine, linkClickListener, mLinkMovementMethod
+                shouldShowUnderLine, linkClickListener, mLinkMovementMethod, mBold
             )
         }
 
@@ -151,7 +158,7 @@ object Linker {
         mTextView: TextView, content: String, links: List<String>,
         color: Int, shouldShowUnderLine: Boolean,
         linkClickListener: OnLinkClickListener?,
-        mLinkMovementMethod: LinkMovementMethod?
+        mLinkMovementMethod: LinkMovementMethod?, mBold: Boolean
     ) {
         val spannableString = SpannableString(content)
 
@@ -174,11 +181,17 @@ object Linker {
 
                     override fun updateDrawState(ds: TextPaint) {
                         ds.color = color
+                        ds.isFakeBoldText = mBold
                         ds.isUnderlineText = shouldShowUnderLine
                     }
                 }
 
-                spannableString.setSpan(clickableSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(
+                    clickableSpan,
+                    matcher.start(),
+                    matcher.end(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
         }
         mTextView.text = spannableString
@@ -194,7 +207,7 @@ object Linker {
         mTextView: TextView, content: String, links: List<Pair<String, Int>>,
         shouldShowUnderLine: Boolean,
         linkClickListener: OnLinkClickListener?,
-        mLinkMovementMethod: LinkMovementMethod?
+        mLinkMovementMethod: LinkMovementMethod?, mBold: Boolean
     ) {
 
         val spannableString = SpannableString(content)
@@ -219,11 +232,17 @@ object Linker {
 
                     override fun updateDrawState(ds: TextPaint) {
                         ds.color = value.second
+                        ds.isFakeBoldText = mBold
                         ds.isUnderlineText = shouldShowUnderLine
                     }
                 }
 
-                spannableString.setSpan(clickableSpan, matcher.start(), matcher.end(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                spannableString.setSpan(
+                    clickableSpan,
+                    matcher.start(),
+                    matcher.end(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                )
             }
         }
 
@@ -262,7 +281,12 @@ object Linker {
                 }
 
             }
-            spannableString.setSpan(clickableSpan, index, index + key.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            spannableString.setSpan(
+                clickableSpan,
+                index,
+                index + key.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
         }
 
         textView.text = spannableString

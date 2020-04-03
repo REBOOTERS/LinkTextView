@@ -90,6 +90,7 @@ Linker.Builder()
 |shouldShowUnderLine|whether to show underline for clickable word|no| false|
 |addOnLinkClickListener|add a listener will callback once click the link word|no| null|
 |setLinkMovementMethod|add a custom LinkMovementMethod|no| internal|
+|bold|true means textStyle="bold"|no| false|
 |apply|apply the function|yes| none|
 
 

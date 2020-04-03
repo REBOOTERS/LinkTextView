@@ -41,6 +41,9 @@ captures/
 .idea/dictionaries
 .idea/libraries
 .idea/caches
+.idea
+*.*/.DS_Store
+.project
 
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
