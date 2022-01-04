@@ -1,0 +1,53 @@
+apply plugin: 'maven-publish'
+
+buildscript {
+    ext{
+        GitHubName = "REBOOTERS"
+        // Personal Access Token
+        PAT = null
+
+        File localFile = rootProject.file('local.properties')
+        if (localFile.exists()) {
+            Properties properties = new Properties()
+            properties.load(localFile.newDataInputStream())
+            PAT = properties.getProperty('linktextview.token')
+        }
+    }
+}
+
+publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/$GitHubName/LinkTextView")
+            credentials {
+                username = "$GitHubName" ?: System.getenv("USERNAME")
+
+                println("username = $GitHubName,pw = $PAT")
+                if (PAT == null)
+                    password = System.getenv("TOKEN")
+                else
+                    password = PAT
+            }
+        }
+    }
+    publications {
+        //This defines a publication called "JohnBase"
+        // that can be published to a Maven repository
+        // by virtue of its type: MavenPublication.
+        linktextview(MavenPublication) {
+//            This publication consists of just
+//            the production JAR artifact and its metadata,
+//            which combined are represented by the
+//            java component of the project.
+
+//            from components.java
+
+            groupId = 'com.github.rebooters'
+            artifactId = 'linktextview'
+            version = '1.0.5'
+
+            artifact("$buildDir/outputs/aar/linktextview-release.aar")
+        }
+    }
+}
