@@ -78,6 +78,19 @@ Linker.Builder()
 
 ```
 
+### highlight
+
+only highlight ,don't need click ,just use kotlin dsl 
+
+```kotlin
+        HighLight.highLight {
+            mTextView = viewBinding.textView7
+            mContent = actors
+            mLinks = actorsRules
+            mColor = Color.GREEN
+        }
+```
+
 ## API 
 
  method | function | must invocation| defaultValue

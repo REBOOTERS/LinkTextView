@@ -1,11 +1,13 @@
 package com.engineer.linktextview.activity
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import com.engineer.linktextview.HighLight
 import com.engineer.linktextview.Linker
 import com.engineer.linktextview.R
 import com.engineer.linktextview.databinding.ActivityExampleBinding
@@ -119,6 +121,13 @@ class ExampleActivity : AppCompatActivity() {
             .addOnLinkClickListener(onLinkClickListener)
             .apply()
         //</editor-fold>
+
+        HighLight.highLight {
+            mTextView = viewBinding.textView7
+            mContent = actors
+            mLinks = actorsRules
+            mColor = Color.GREEN
+        }
     }
 
 
