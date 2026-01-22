@@ -7,7 +7,6 @@ android {
     compileSdkVersion ext.compileSdkVersion
     defaultConfig {
         minSdkVersion ext.minSdkVersion
-        targetSdkVersion ext.targetSdkVersion
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -27,6 +26,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '11'
+    }
+    lint {
+        targetSdk 35
+    }
+    testOptions {
+        targetSdk 35
     }
 
 }
